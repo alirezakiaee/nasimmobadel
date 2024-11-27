@@ -11,20 +11,23 @@ const cards = productCategories.map(category => ({
 }));
 
 export default function ProductsPage() {
-  const breadcrumbItems = [
-    { label: "Products", href: "/products" }
-  ];
-
   return (
-    <div className="min-h-screen w-full py-12 flex items-center justify-center bg-accent/5">
-      <div className="w-full max-w-7xl mt-10 mx-auto px-4">
-        <ProductBreadcrumb items={breadcrumbItems} className="mb-8" />
-        <div className="text-center mb-12">
-          <h1 className="mt-10 text-4xl font-bold mb-4">Our Product Range</h1>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Discover our comprehensive range of heat exchangers designed for various industrial applications
-          </p>
-        </div>
+    <div className="container mx-auto px-4 py-8">
+      <ProductBreadcrumb
+        items={[
+          { label: "Home", href: "/" },
+          { label: "Products", href: "/products" },
+        ]}
+      />
+      
+      <div className="max-w-3xl mx-auto text-center mb-16">
+        <h1 className="text-4xl font-bold mt-8 mb-4">Our Product Range</h1>
+        <p className="text-xl text-muted-foreground">
+          Discover our comprehensive range of heat exchangers designed for various industrial applications
+        </p>
+      </div>
+
+      <div className="max-w-7xl mx-auto">
         <FocusCards cards={cards} />
       </div>
     </div>

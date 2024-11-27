@@ -29,7 +29,7 @@ export const MenuItem = ({
       <div onMouseEnter={() => setActive(item)} className="relative">
         <m.p
           transition={{ duration: 0.3 }}
-          className="cursor-pointer text-black hover:opacity-[0.9] dark:text-white"
+          className="cursor-pointer hover:text-primary"
         >
           {item}
         </m.p>
@@ -44,7 +44,7 @@ export const MenuItem = ({
                 <m.div
                   transition={transition}
                   layoutId="active"
-                  className="bg-white dark:bg-black backdrop-blur-sm rounded-2xl overflow-hidden border border-black/[0.2] dark:border-white/[0.2] shadow-xl"
+                  className="bg-background/80 backdrop-blur-sm rounded-2xl overflow-hidden border border-black/[0.2] dark:border-white/[0.2] shadow-xl"
                 >
                   <m.div
                     layout
@@ -72,7 +72,7 @@ export const Menu = ({
   return (
     <nav
       onMouseLeave={() => setActive(null)}
-      className="relative rounded-full border border-transparent dark:bg-black dark:border-white/[0.2] bg-white shadow-input flex justify-center space-x-4 px-8 py-6"
+      className="relative rounded-full border border-transparent dark:bg-black dark:border-white/[0.2] shadow-input flex justify-center space-x-4 px-2 py-6"
     >
       {children}
     </nav>

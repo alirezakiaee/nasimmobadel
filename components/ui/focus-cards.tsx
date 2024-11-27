@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { LazyMotion, domAnimation, m } from "framer-motion";
 import Link from "next/link";
 import { ComponentProps } from "react";
+import { LoadingSpinner } from "./loading";
 
 interface Card {
   title: string;
@@ -81,6 +82,20 @@ interface FocusCardsProps {
 
 export function FocusCards({ cards }: FocusCardsProps) {
   const [hovered, setHovered] = useState<number | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate loading time for images
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
 
   return (
     <LazyMotion features={domAnimation}>
