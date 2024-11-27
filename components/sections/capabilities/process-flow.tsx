@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { processSteps } from "./data";
 
@@ -9,7 +9,7 @@ export function ProcessFlow() {
     <div className="mb-16">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
         {processSteps.map((step, index) => (
-          <motion.div
+          <m.div
             key={step.id}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -25,7 +25,7 @@ export function ProcessFlow() {
                 <p className="text-muted-foreground">{step.description}</p>
               </CardContent>
             </Card>
-          </motion.div>
+          </m.div>
         ))}
       </div>
     </div>

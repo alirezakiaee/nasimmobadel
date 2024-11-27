@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { ApplicationCard } from "./application-card";
 import { applications } from "./data";
 
@@ -8,7 +8,7 @@ export function Applications() {
   return (
     <section className="w-full py-24 bg-accent/5">
       <div className="container mx-auto">
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
@@ -19,7 +19,7 @@ export function Applications() {
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Our heat exchangers power critical processes across diverse industries
           </p>
-        </motion.div>
+        </m.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {applications.map((application, index) => (

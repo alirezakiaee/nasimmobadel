@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
+import { m, useInView } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { type Statistic } from "./data";
@@ -38,7 +38,7 @@ export function StatCard({ stat, index }: StatCardProps) {
   }, [isInView, stat.value]);
 
   return (
-    <motion.div
+    <m.div
       ref={ref}
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -54,6 +54,6 @@ export function StatCard({ stat, index }: StatCardProps) {
           <p className="text-muted-foreground">{stat.label}</p>
         </CardContent>
       </Card>
-    </motion.div>
+    </m.div>
   );
 }

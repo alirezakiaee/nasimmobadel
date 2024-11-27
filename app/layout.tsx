@@ -4,6 +4,7 @@ import { Outfit } from 'next/font/google';
 import { ThemeProvider } from '@/components/theme-provider';
 import { Navbar } from '@/components/navbar';
 import { Toaster } from '@/components/ui/sonner';
+import { LazyMotion, domAnimation, AnimatePresence } from "framer-motion";
 
 const outfit = Outfit({ subsets: ['latin'] });
 
@@ -27,9 +28,13 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <Navbar />
-          {children}
-          <Toaster />
+          <LazyMotion features={domAnimation} strict>
+            <AnimatePresence mode="wait">
+              <Navbar />
+              {children}
+              <Toaster />
+            </AnimatePresence>
+          </LazyMotion>
         </ThemeProvider>
       </body>
     </html>

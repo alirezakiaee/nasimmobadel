@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { ProductCard } from "./product-card";
 import { ProductFilter } from "./product-filter";
 import { useState } from "react";
@@ -12,7 +12,7 @@ export function ProductCatalog() {
   return (
     <section className="w-full py-24 bg-accent/5">
       <div className="container mx-auto">
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
@@ -23,7 +23,7 @@ export function ProductCatalog() {
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Discover our comprehensive range of heat exchangers designed for various industrial applications
           </p>
-        </motion.div>
+        </m.div>
 
         <ProductFilter onFilter={setFilteredProducts} />
 

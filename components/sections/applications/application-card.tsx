@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
 import { type Application } from "./data";
@@ -12,7 +12,7 @@ interface ApplicationCardProps {
 
 export function ApplicationCard({ application, index }: ApplicationCardProps) {
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
@@ -35,6 +35,6 @@ export function ApplicationCard({ application, index }: ApplicationCardProps) {
           </div>
         </CardContent>
       </Card>
-    </motion.div>
+    </m.div>
   );
 }

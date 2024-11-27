@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
@@ -32,7 +32,7 @@ const ParticlesAnimation = () => {
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
       {/* Red particles moving right to left */}
-      <motion.div
+      <m.div
         animate={{
           x: ["0%", "-100%"],
         }}
@@ -45,7 +45,7 @@ const ParticlesAnimation = () => {
       >
         <div className="w-[100vw] h-screen flex-none relative">
           {redParticles.map((particle) => (
-            <motion.div
+            <m.div
               key={particle.id}
               className="absolute rounded-full"
               style={{
@@ -61,7 +61,7 @@ const ParticlesAnimation = () => {
         </div>
         <div className="w-[100vw] h-screen flex-none relative">
           {redParticles.map((particle) => (
-            <motion.div
+            <m.div
               key={particle.id}
               className="absolute rounded-full"
               style={{
@@ -75,10 +75,10 @@ const ParticlesAnimation = () => {
             />
           ))}
         </div>
-      </motion.div>
+      </m.div>
 
       {/* Blue particles moving left to right */}
-      <motion.div
+      <m.div
         animate={{
           x: ["-100%", "0%"],
         }}
@@ -91,7 +91,7 @@ const ParticlesAnimation = () => {
       >
         <div className="w-[100vw] h-screen flex-none relative">
           {blueParticles.map((particle) => (
-            <motion.div
+            <m.div
               key={particle.id}
               className="absolute rounded-full"
               style={{
@@ -107,7 +107,7 @@ const ParticlesAnimation = () => {
         </div>
         <div className="w-[100vw] h-screen flex-none relative">
           {blueParticles.map((particle) => (
-            <motion.div
+            <m.div
               key={particle.id}
               className="absolute rounded-full"
               style={{
@@ -121,7 +121,7 @@ const ParticlesAnimation = () => {
             />
           ))}
         </div>
-      </motion.div>
+      </m.div>
     </div>
   );
 };
@@ -148,7 +148,7 @@ const TestimonialImages = () => {
     <div className="relative h-80 w-full">
       <AnimatePresence>
         {testimonials.map((testimonial, index) => (
-          <motion.div
+          <m.div
             key={testimonial.src}
             initial={{
               opacity: 0,
@@ -186,7 +186,7 @@ const TestimonialImages = () => {
               draggable={false}
               className="h-full w-full rounded-3xl object-cover object-center"
             />
-          </motion.div>
+          </m.div>
         ))}
       </AnimatePresence>
     </div>
@@ -199,7 +199,7 @@ const StreamAnimation = () => {
       <div className="absolute inset-0 bg-gradient-to-r from-background via-transparent to-background z-10" />
       <ParticlesAnimation />
       <div className="absolute inset-0">
-        <motion.div
+        <m.div
           animate={{
             x: ["0%", "-100%"],
           }}
@@ -220,7 +220,7 @@ const StreamAnimation = () => {
             <div className="absolute top-[60%] left-[60%] w-[600px] h-[600px] bg-gradient-to-r from-red-600/40 to-blue-600/40 rounded-full blur-[120px]" />
             <div className="absolute top-[45%] left-[50%] w-[700px] h-[700px] bg-gradient-to-r from-blue-500/30 to-red-500/30 rounded-full blur-[120px]" />
           </div>
-        </motion.div>
+        </m.div>
       </div>
     </div>
   );
@@ -232,7 +232,7 @@ export function HeroSection() {
       <StreamAnimation />
       <div className="absolute inset-0 flex items-center pt-16">
         <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 py-12 relative z-10">
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
@@ -253,15 +253,15 @@ export function HeroSection() {
                 View Products
               </Button>
             </div>
-          </motion.div>
-          <motion.div
+          </m.div>
+          <m.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
             className="relative w-full h-[600px] flex items-center justify-center"
           >
             <TestimonialImages />
-          </motion.div>
+          </m.div>
         </div>
       </div>
     </section>
