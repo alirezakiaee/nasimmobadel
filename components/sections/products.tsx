@@ -64,14 +64,17 @@ export default function ProductsSection() {
           alt="Products Banner"
           fill
           className="object-cover"
+          priority
+          sizes="100vw"
+          quality={75}
         />
         <div className="absolute inset-0 bg-black/40 flex flex-col items-center justify-center">
           <h1 className="text-4xl md:text-6xl font-bold text-white text-center">
             Our Products
           </h1>
-            <p className="mt-4 max-w-2xl text-xl text-white/80 md:text-600 mx-auto">
-              Discover our range of high-precision industrial models
-            </p>
+          <p className="mt-4 max-w-2xl text-xl text-white/80 md:text-600 mx-auto">
+            Discover our range of high-precision industrial models
+          </p>
         </div>
       </div>
 
