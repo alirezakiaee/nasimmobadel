@@ -4,11 +4,13 @@ import { useState } from "react";
 import Link from "next/link";
 import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
-import { Sun, Moon, Menu, X } from "lucide-react";
+import { Sun, Moon, Menu as MenuIcon, X } from "lucide-react";
+import { Menu, MenuItem, HoveredLink } from "@/components/ui/navbar-menu";
 
 export function Navbar() {
   const { theme, setTheme } = useTheme();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [active, setActive] = useState<string | null>(null);
 
   return (
     <nav className="fixed w-full z-50 bg-background/80 backdrop-blur-sm border-b">
@@ -33,6 +35,16 @@ export function Navbar() {
             <Link href="/case-studies" className="hover:text-primary">
               Case Studies
             </Link>
+            <Menu setActive={setActive}>
+              <MenuItem setActive={setActive} active={active} item="About">
+                <div className="flex flex-col space-y-4 text-sm min-w-[8rem]">
+                  <HoveredLink href="/about">About Us</HoveredLink>
+                  <HoveredLink href="/about#vision">Our Vision</HoveredLink>
+                  <HoveredLink href="/about#mission">Our Mission</HoveredLink>
+                  <HoveredLink href="/careers">Careers</HoveredLink>
+                </div>
+              </MenuItem>
+            </Menu>
             <Button variant="outline" size="icon" onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
               {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
             </Button>
@@ -41,7 +53,7 @@ export function Navbar() {
 
           <div className="md:hidden flex items-center">
             <Button variant="ghost" size="icon" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-              {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              {isMenuOpen ? <X className="h-6 w-6" /> : <MenuIcon className="h-6 w-6" />}
             </Button>
           </div>
         </div>
@@ -62,6 +74,21 @@ export function Navbar() {
             <Link href="/case-studies" className="block px-3 py-2 hover:bg-accent rounded-md">
               Case Studies
             </Link>
+            <div className="px-3 py-2 space-y-1">
+              <div className="font-medium">About</div>
+              <Link href="/about" className="block pl-4 py-2 hover:bg-accent rounded-md">
+                About Us
+              </Link>
+              <Link href="/about#vision" className="block pl-4 py-2 hover:bg-accent rounded-md">
+                Our Vision
+              </Link>
+              <Link href="/about#mission" className="block pl-4 py-2 hover:bg-accent rounded-md">
+                Our Mission
+              </Link>
+              <Link href="/careers" className="block pl-4 py-2 hover:bg-accent rounded-md">
+                Careers
+              </Link>
+            </div>
             <div className="px-3 py-2">
               <Button className="w-full">Request Quote</Button>
             </div>
