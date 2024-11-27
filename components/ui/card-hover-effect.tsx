@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 interface CardProps {
   className?: string;
@@ -69,17 +69,24 @@ const CardDescription = ({ className, children }: CardDescriptionProps) => {
   );
 };
 
+const LoadingCard = () => (
+  <div className="rounded-2xl h-full w-full p-4 overflow-hidden bg-white shadow-lg animate-pulse">
+    <div className="w-full h-48 bg-gray-200 rounded-xl mb-4"></div>
+    <div className="h-6 bg-gray-200 rounded w-3/4 mb-4"></div>
+    <div className="h-4 bg-gray-200 rounded w-full"></div>
+  </div>
+);
+
 export function HoverEffect({ items, className }: HoverEffectProps) {
-  let [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  const [isMounted, setIsMounted] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setIsMounted(true);
-  }, []);
+    const timer = setTimeout(() => {
+      setMounted(true);
+    }, 100); // Small delay to ensure proper hydration
 
-  if (!isMounted) {
-    return null; // Return null on server-side
-  }
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <div
@@ -88,48 +95,41 @@ export function HoverEffect({ items, className }: HoverEffectProps) {
         className
       )}
     >
-      {items.map((item, idx) => (
-        <Link
-          href={item?.link}
-          key={item?.link}
-          className="relative group block p-2 h-full w-full"
-          onMouseEnter={() => setHoveredIndex(idx)}
-          onMouseLeave={() => setHoveredIndex(null)}
-        >
-          <AnimatePresence>
-            {hoveredIndex === idx && (
-              <motion.span
-                className="absolute inset-0 h-full w-full bg-orange-100 block rounded-3xl"
-                layoutId="hoverBackground"
-                initial={{ opacity: 0 }}
-                animate={{
-                  opacity: 1,
-                  transition: { duration: 0.15 },
-                }}
-                exit={{
-                  opacity: 0,
-                  transition: { duration: 0.15, delay: 0.2 },
-                }}
-              />
-            )}
-          </AnimatePresence>
-          <Card>
-            <div className="relative w-full h-48 mb-4 rounded-xl overflow-hidden">
-              <Image
-                src={item.image}
-                alt={item.title}
-                fill
-                className="object-cover"
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
-                quality={75}
-                loading="lazy"
-              />
-            </div>
-            <CardTitle>{item.title}</CardTitle>
-            <CardDescription>{item.description}</CardDescription>
-          </Card>
-        </Link>
-      ))}
+      {!mounted
+        ? // Loading state
+          Array(items.length)
+            .fill(null)
+            .map((_, idx) => (
+              <div key={idx} className="p-2">
+                <LoadingCard />
+              </div>
+            ))
+        : // Actual content
+          items.map((item, idx) => (
+            <Link
+              href={item?.link}
+              key={item?.link}
+              className="relative group block p-2 h-full w-full"
+              onMouseEnter={() => {}}
+              onMouseLeave={() => {}}
+            >
+              <Card>
+                <div className="relative w-full h-48 mb-4 rounded-xl overflow-hidden">
+                  <Image
+                    src={item.image}
+                    alt={item.title}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                    quality={75}
+                    loading="lazy"
+                  />
+                </div>
+                <CardTitle>{item.title}</CardTitle>
+                <CardDescription>{item.description}</CardDescription>
+              </Card>
+            </Link>
+          ))}
     </div>
   );
 }

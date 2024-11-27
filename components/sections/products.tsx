@@ -55,39 +55,51 @@ const productItems = [
   }
 ];
 
+const LoadingBanner = () => (
+  <div className="w-full h-[300px] relative overflow-hidden bg-gray-200 animate-pulse">
+    <div className="absolute inset-0 flex flex-col items-center justify-center">
+      <div className="h-12 bg-gray-300 rounded w-3/4 max-w-md mb-4"></div>
+      <div className="h-6 bg-gray-300 rounded w-1/2 max-w-sm"></div>
+    </div>
+  </div>
+);
+
 export default function ProductsSection() {
-  const [isMounted, setIsMounted] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setIsMounted(true);
-  }, []);
+    const timer = setTimeout(() => {
+      setMounted(true);
+    }, 100); // Small delay to ensure proper hydration
 
-  if (!isMounted) {
-    return null;
-  }
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <div className="bg-gray-50 text-gray-300">
-      {/* Banner */}
-      <div className="w-full h-[300px] relative overflow-hidden">
-        <Image
-          src="https://www.shell-tube.com/images/shell_tube_heat_exchanger.jpg"
-          alt="Products Banner"
-          fill
-          className="object-cover"
-          priority
-          sizes="100vw"
-          quality={75}
-        />
-        <div className="absolute inset-0 bg-black/40 flex flex-col items-center justify-center">
-          <h1 className="text-4xl md:text-6xl font-bold text-white text-center">
-            Our Products
-          </h1>
-          <p className="mt-4 max-w-2xl text-xl text-white/80 md:text-600 mx-auto">
-            Discover our range of high-precision industrial models
-          </p>
+      {!mounted ? (
+        <LoadingBanner />
+      ) : (
+        <div className="w-full h-[300px] relative overflow-hidden">
+          <Image
+            src="https://www.shell-tube.com/images/shell_tube_heat_exchanger.jpg"
+            alt="Products Banner"
+            fill
+            className="object-cover"
+            priority
+            sizes="100vw"
+            quality={75}
+          />
+          <div className="absolute inset-0 bg-black/40 flex flex-col items-center justify-center">
+            <h1 className="text-4xl md:text-6xl font-bold text-white text-center">
+              Our Products
+            </h1>
+            <p className="mt-4 max-w-2xl text-xl text-white/80 md:text-600 mx-auto">
+              Discover our range of high-precision industrial models
+            </p>
+          </div>
         </div>
-      </div>
+      )}
 
       <div className="py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
