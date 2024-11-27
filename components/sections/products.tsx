@@ -2,6 +2,7 @@
 
 import { HoverEffect } from "@/components/ui/card-hover-effect";
 import Image from "next/image";
+import { useState, useEffect } from "react";
 
 const productItems = [
   {
@@ -55,6 +56,16 @@ const productItems = [
 ];
 
 export default function ProductsSection() {
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) {
+    return null;
+  }
+
   return (
     <div className="bg-gray-50 text-gray-300">
       {/* Banner */}
