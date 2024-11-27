@@ -1,6 +1,7 @@
 export interface CaseStudy {
   id: string;
   title: string;
+  description: string;
   challenge: string;
   solution: string;
   results: string;
@@ -11,6 +12,7 @@ export const caseStudies: CaseStudy[] = [
   {
     id: "refinery-optimization",
     title: "Refinery Heat Recovery Optimization",
+    description: "Revolutionizing energy efficiency in oil refineries through advanced heat exchanger technology.",
     challenge: "A major oil refinery faced significant energy losses and high operational costs due to inefficient heat exchange systems.",
     solution: "Implementation of custom-designed shell and tube heat exchangers with advanced fouling resistance technology.",
     results: "40% reduction in energy consumption and $2.5M annual cost savings with ROI achieved in 18 months.",
@@ -19,6 +21,7 @@ export const caseStudies: CaseStudy[] = [
   {
     id: "food-processing",
     title: "Food Processing Plant Upgrade",
+    description: "Enhancing temperature control and hygiene standards in food processing through innovative heat exchange solutions.",
     challenge: "Food processing facility required precise temperature control while meeting strict hygiene standards.",
     solution: "Installation of specialized plate heat exchangers with enhanced CIP capabilities and digital monitoring.",
     results: "99.9% temperature accuracy achieved with 30% reduction in maintenance downtime.",
