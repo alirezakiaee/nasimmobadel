@@ -1,17 +1,18 @@
 import * as React from 'react';
 import { Slot } from '@radix-ui/react-slot';
 import { ChevronRight, MoreHorizontal } from 'lucide-react';
-
 import { cn } from '@/lib/utils';
 import Link from "next/link";
 
-const Breadcrumb = React.forwardRef<
-  HTMLElement,
-  React.ComponentPropsWithoutRef<'nav'> & {
-    separator?: React.ReactNode;
-  }
->(({ ...props }, ref) => <nav ref={ref} aria-label="breadcrumb" {...props} />);
-Breadcrumb.displayName = 'Breadcrumb';
+export interface BreadcrumbItem {
+  label: string;
+  href: string;
+}
+
+export interface BreadcrumbProps extends React.ComponentPropsWithoutRef<'nav'> {
+  items: BreadcrumbItem[];
+  className?: string;
+}
 
 const BreadcrumbList = React.forwardRef<
   HTMLOListElement,
@@ -42,20 +43,14 @@ BreadcrumbItem.displayName = 'BreadcrumbItem';
 
 const BreadcrumbLink = React.forwardRef<
   HTMLAnchorElement,
-  React.ComponentPropsWithoutRef<'a'> & {
-    asChild?: boolean;
-  }
->(({ asChild, className, ...props }, ref) => {
-  const Comp = asChild ? Slot : 'a';
-
-  return (
-    <Comp
-      ref={ref}
-      className={cn('transition-colors hover:text-foreground', className)}
-      {...props}
-    />
-  );
-});
+  React.ComponentPropsWithoutRef<typeof Link>
+>(({ className, ...props }, ref) => (
+  <Link
+    ref={ref}
+    className={cn('transition-colors hover:text-foreground', className)}
+    {...props}
+  />
+));
 BreadcrumbLink.displayName = 'BreadcrumbLink';
 
 const BreadcrumbPage = React.forwardRef<
@@ -105,54 +100,51 @@ const BreadcrumbEllipsis = ({
 );
 BreadcrumbEllipsis.displayName = 'BreadcrumbEllipsis';
 
-export interface BreadcrumbItem {
-  label: string;
-  href: string;
-}
-
-interface BreadcrumbProps {
-  items: BreadcrumbItem[];
-  className?: string;
-}
-
-export function Breadcrumb({ items, className }: BreadcrumbProps) {
-  return (
-    <nav className={cn("flex", className)} aria-label="Breadcrumb">
-      <ol className="inline-flex items-center space-x-1 md:space-x-3">
-        <li className="inline-flex items-center">
-          <Link
-            href="/"
-            className="inline-flex items-center text-sm font-medium text-muted-foreground hover:text-foreground"
-          >
-            Home
-          </Link>
-        </li>
-        {items.map((item, index) => (
-          <li key={item.href}>
-            <div className="flex items-center">
-              <span className="mx-2.5 text-muted-foreground">/</span>
-              <Link
-                href={item.href}
-                className={cn(
-                  "text-sm font-medium",
-                  index === items.length - 1
-                    ? "text-foreground cursor-default pointer-events-none"
-                    : "text-muted-foreground hover:text-foreground"
-                )}
-                aria-current={index === items.length - 1 ? "page" : undefined}
-              >
-                {item.label}
-              </Link>
-            </div>
+export const Breadcrumb = React.forwardRef<HTMLElement, BreadcrumbProps>(
+  ({ items, className, ...props }, ref) => {
+    return (
+      <nav 
+        ref={ref}
+        className={cn("flex", className)} 
+        aria-label="Breadcrumb"
+        {...props}
+      >
+        <ol className="inline-flex items-center space-x-1 md:space-x-3">
+          <li className="inline-flex items-center">
+            <Link
+              href="/"
+              className="inline-flex items-center text-sm font-medium text-muted-foreground hover:text-foreground"
+            >
+              Home
+            </Link>
           </li>
-        ))}
-      </ol>
-    </nav>
-  );
-}
+          {items.map((item, index) => (
+            <li key={item.href}>
+              <div className="flex items-center">
+                <BreadcrumbSeparator />
+                <Link
+                  href={item.href}
+                  className={cn(
+                    "text-sm font-medium",
+                    index === items.length - 1
+                      ? "text-foreground cursor-default pointer-events-none"
+                      : "text-muted-foreground hover:text-foreground"
+                  )}
+                  aria-current={index === items.length - 1 ? "page" : undefined}
+                >
+                  {item.label}
+                </Link>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </nav>
+    );
+  }
+);
+Breadcrumb.displayName = 'Breadcrumb';
 
 export {
-  Breadcrumb,
   BreadcrumbList,
   BreadcrumbItem,
   BreadcrumbLink,
