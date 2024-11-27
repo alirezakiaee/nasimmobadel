@@ -1,21 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
+  // Remove static export for Vercel
+  images: {
+    domains: ['images.unsplash.com', 'www.shell-tube.com'],
+  },
   eslint: {
     ignoreDuringBuilds: true,
-  },
-  images: {
-    unoptimized: true,
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'www.shell-tube.com',
-      },
-      {
-        protocol: 'https',
-        hostname: 'images.unsplash.com',
-      },
-    ],
   },
 };
 
