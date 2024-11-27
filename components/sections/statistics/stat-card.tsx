@@ -46,12 +46,12 @@ export function StatCard({ stat, index }: StatCardProps) {
       viewport={{ once: true }}
     >
       <Card>
-        <CardContent className="pt-6">
-          <div className="text-4xl font-bold mb-2">
+        <CardContent className="pt-6 pb-8">
+          <div className="text-3xl sm:text-4xl font-bold mb-2">
             {count}
-            {stat.suffix}
+            {stat.suffix && <span className="text-muted-foreground">{stat.suffix}</span>}
           </div>
-          <p className="text-muted-foreground">{stat.label}</p>
+          <p className="text-sm sm:text-base text-muted-foreground">{stat.label}</p>
         </CardContent>
       </Card>
     </m.div>

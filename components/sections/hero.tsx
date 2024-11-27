@@ -230,18 +230,18 @@ export function HeroSection() {
   return (
     <section className="w-full min-h-screen relative overflow-hidden bg-background/80">
       <StreamAnimation />
-      <div className="absolute inset-0 flex items-center pt-16">
-        <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 py-12 relative z-10">
+      <div className="absolute inset-0 flex items-center">
+        <div className="container mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 py-8 md:py-12 relative z-10">
           <m.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="flex flex-col justify-center"
+            className="flex flex-col justify-center space-y-6 md:space-y-8"
           >
-            <h1 className="text-4xl md:text-6xl font-bold mb-6">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight">
               Next-Generation <span className="text-red-600">Heat</span> <span className="text-blue-600">Exchange</span> Solutions
             </h1>
-            <p className="text-lg md:text-xl text-muted-foreground mb-8">
+            <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl">
               Revolutionizing industrial efficiency with advanced thermal technology.
               Our heat exchangers deliver unmatched performance and reliability.
             </p>
@@ -258,7 +258,7 @@ export function HeroSection() {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="relative w-full h-[600px] flex items-center justify-center"
+            className="relative w-full h-[400px] md:h-[500px] lg:h-[600px] flex items-center justify-center"
           >
             <TestimonialImages />
           </m.div>
