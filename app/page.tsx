@@ -13,8 +13,8 @@ export default function Home() {
       <ProductCatalog />
       <Capabilities />
       <Applications />
-      <Statistics />
-      <CaseStudies />
+      {/* <Statistics /> */}
+      {/* <CaseStudies /> */}
       <ContactCTA />
     </main>
   );

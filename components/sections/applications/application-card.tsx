@@ -19,20 +19,18 @@ export function ApplicationCard({ application, index }: ApplicationCardProps) {
       viewport={{ once: true }}
     >
       <Card className="group cursor-pointer overflow-hidden">
-        <CardContent className="p-0">
-          <div className="relative h-64">
-            <Image
-              src={application.image}
-              alt={application.title}
-              fill
-              className="object-cover transition-transform duration-300 group-hover:scale-110"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-            <div className="absolute bottom-0 left-0 right-0 p-6">
-              <h3 className="text-xl font-semibold text-white mb-2">{application.title}</h3>
-              <p className="text-white/80">{application.description}</p>
-            </div>
-          </div>
+        <div className="relative h-48">
+          <Image
+            src={application.image}
+            alt={application.title}
+            fill
+            className="object-cover"
+          />
+        </div>
+        <CardContent className="p-6">
+          <h3 className="text-xl font-semibold mb-2">{application.title}</h3>
+          <h4 className="text-lg text-muted-foreground mb-3">{application.title}</h4>
+          <p className="text-sm text-muted-foreground">{application.description}</p>
         </CardContent>
       </Card>
     </m.div>
